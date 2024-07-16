@@ -7,3 +7,33 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+
+# seeding stations
+puts "Seeding stations..."
+["Cairo", "Giza", "AlFayum", "Alminya", "Asyut"].each do |station_name|
+  puts "  - #{station_name}"
+  Station.find_or_create_by!(name: station_name)
+end
+
+# seeding trips
+puts "Seeding trips..."
+
+trips = Trip.all
+trips.each do |trip|
+  trip.destroy
+end
+
+trip = Trip.create!
+puts "  - #{trip.id}"
+stations = Station.all
+stations.each_with_index do |station, index|
+  puts "  - #{station.name}"
+  TripStation.create!(
+    trip_id: trip.id,
+    station_id: station.id,
+    order: index + 1
+  )
+end
+
+

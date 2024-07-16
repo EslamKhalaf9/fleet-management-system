@@ -3,6 +3,7 @@ class CreateJoinTableTripStation < ActiveRecord::Migration[7.1]
     create_join_table :trips, :stations, table_name: :trip_stations do |t|
       t.index :trip_id
       t.index :station_id
+      t.integer :order
     end
   end
 end
