@@ -16,7 +16,7 @@ module Api
         password = login_params[:password]
         user = User.find_by(username: username)
         if user && user.authenticate(password)
-          token = encode_token({ user_id: user.id })
+          token = encode_token(user_id: user.id)
           render json: { user: UserSerializer.new(user), token: token }, status: :created
         else
           render json: { error: 'Invalid username or password' }, status: :unauthorized

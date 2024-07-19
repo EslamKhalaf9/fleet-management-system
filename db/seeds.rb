@@ -1,13 +1,4 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
+TripStation.destroy_all
 
 # seeding stations
 puts "Seeding stations..."
@@ -19,16 +10,17 @@ end
 # seeding trips
 puts "Seeding trips..."
 
-trips = Trip.all
-trips.each do |trip|
-  trip.destroy
+trip = Trip.find_or_create_by!(bus_id: 1)
+puts "  - #{trip.id}"
+
+puts "seeding trip's seats..."
+12.times do |index|
+  Seat.find_or_create_by!(id: index + 1, trip_id: trip.id)
 end
 
-trip = Trip.create!
-puts "  - #{trip.id}"
+puts "Seeding trip_stations..."
 stations = Station.all
 stations.each_with_index do |station, index|
-  puts "  - #{station.name}"
   TripStation.create!(
     trip_id: trip.id,
     station_id: station.id,
