@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_19_103454) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_19_145422) do
   create_table "bookings", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -18,6 +18,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_19_103454) do
     t.integer "trip_id", null: false
     t.integer "from_station_id"
     t.integer "to_station_id"
+    t.integer "seat_id", null: false
+    t.index ["seat_id"], name: "index_bookings_on_seat_id"
     t.index ["trip_id"], name: "index_bookings_on_trip_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
@@ -57,6 +59,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_19_103454) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "bookings", "seats"
   add_foreign_key "bookings", "trips"
   add_foreign_key "bookings", "users"
   add_foreign_key "seats", "trips"
