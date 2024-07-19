@@ -5,17 +5,18 @@ class UsersController < ApplicationController
   end
 
   def create 
-    user = User.create!(user_params)
-    @token = encode_token(user_id: user.id)
-    render json: {
-        user: UserSerializer.new(user), 
-        token: @token
-    }, status: :created
+    user = User.new(user_params)
+    if user.save
+      @token = JwtService.encode(user_id: user.id)
+      render json: { auth_token: @token }, status: :created
+    else
+      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   private
 
   def user_params 
-    params.permit(:username, :email, :password)
+    params.require(:user).permit(:username, :email, :password)
   end
 end
