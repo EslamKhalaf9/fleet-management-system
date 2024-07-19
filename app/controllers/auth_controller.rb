@@ -1,4 +1,5 @@
 class AuthController < ApplicationController
+  skip_before_action :authenticate_user, only: [:login]
   def show
     decoded_token = JwtService.decode request
     if decoded_token
