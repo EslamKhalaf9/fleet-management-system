@@ -1,17 +1,24 @@
 TripStation.destroy_all
+Booking.destroy_all
+Seat.destroy_all
+Trip.destroy_all
+Station.destroy_all
+User.destroy_all
 
+User.find_or_create_by!(username: "admin", email: "admin@mail.com", password_digest: "$2a$12$vQx8RhqVbq.za6yQIqOR4uYOLA99O5.nbSrJSIeg/BrkXU1IXJS.i")
 # seeding stations
 puts "Seeding stations..."
-["Cairo", "Giza", "AlFayum", "Alminya", "Asyut"].each do |station_name|
-  puts "  - #{station_name}"
-  Station.find_or_create_by!(name: station_name)
+stations = ["Cairo", "Giza", "AlFayum", "Alminya", "Asyut"]
+stations.each do |station_name|
+  puts "seeding - #{station_name}"
+  Station.find_or_create_by!(id: stations.index(station_name) + 1, name: station_name)
 end
 
 # seeding trips
 puts "Seeding trips..."
 
 trip = Trip.find_or_create_by!(bus_id: 1)
-puts "  - #{trip.id}"
+puts "seeding - #{trip.id}"
 
 puts "seeding trip's seats..."
 12.times do |index|

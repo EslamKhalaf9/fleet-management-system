@@ -4,6 +4,7 @@ describe "Seats API", type: :request do
   before(:all) do
     Rails.application.load_seed
   end
+  let(:user) { UserService.create_user("testUser", "test@mail.com", "password") }
 
   describe "GET /seats" do
 
@@ -13,7 +14,6 @@ describe "Seats API", type: :request do
     end
 
     it "should return all seats" do
-      user = User.create(username: "admin", email: "admin@mail.com", password: "password")
       get("/seats/1/2", headers: { "Authorization" => "Bearer #{JwtService.encode(user_id: user.id)}" })
 
       expect(response).to have_http_status(:ok)
@@ -22,7 +22,6 @@ describe "Seats API", type: :request do
     end
     
     it "should return empty array when providing invalid station ids" do
-      user = User.create(username: "admin", email: "admin@mail.com", password: "password")
       get("/seats/0/0", headers: { "Authorization" => "Bearer #{JwtService.encode(user_id: user.id)}" })
       expect(response).to have_http_status(:ok)
       expect(response.body).to eq("[]")

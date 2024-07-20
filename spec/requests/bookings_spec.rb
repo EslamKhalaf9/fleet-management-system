@@ -4,8 +4,8 @@ describe "Bookings API", type: :request do
   before(:all) do
     Rails.application.load_seed
   end
-  let (:user) { User.create!(username: "admin", email: "admin@mail.com", password: "password") }
-  let(:trip) { Trip.first }
+  let(:user) { UserService.create_user("testUser", "test@mail.com", "password") }
+  let!(:trip) { Trip.first }
   let(:seat) { Seat.first }
   describe "POST /bookings" do
     it "should return unauthorized when not authenticated" do
