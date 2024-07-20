@@ -29,7 +29,6 @@ class TripService
     all_seats = Seat
       .where(trip_id: trip_id)
       .pluck(:id)
-
     available_seats = all_seats - booked_seats
   end
 
