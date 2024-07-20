@@ -32,7 +32,7 @@ Things you may want to cover:
 ### Docker
 
 side notes:
-- all the containers runs (api, postgres) but didn't manage to access it through my host machine (localhost:3000 | 172.0.0.0:3000), still figuring it out
+- All of the containers are running without issues (api, postgres) but didn't manage to access it through my host machine (localhost:3000 | 172.0.0.0:3000), still figuring it out
 
 1. create `.env` file 
 2. but these credentials
