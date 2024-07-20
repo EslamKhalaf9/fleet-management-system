@@ -9,7 +9,7 @@ class BookingsController < ApplicationController
   end
 
   def create 
-    if check_seat(booking_params[:seat_id], booking_params[:trip_id])
+    if check_seat(booking_params[:seat_id], booking_params[:trip_id], booking_params[:from_station_id], booking_params[:to_station_id])
       booking = Booking.new
       booking.user_id = @current_user.id
       booking.trip_id = booking_params[:trip_id]
@@ -26,8 +26,8 @@ class BookingsController < ApplicationController
     end
   end
 
-  def check_seat(seat_id, trip_id)
-    TripService.get_available_seats_by_trip(trip_id).include?(seat_id)
+  def check_seat(seat_id, trip_id, from_station_id, to_station_id)
+    TripService.get_available_seats_by_trip(trip_id, from_station_id, to_station_id).include?(seat_id)
   end
 
   def booking_params
