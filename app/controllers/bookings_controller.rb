@@ -27,7 +27,7 @@ class BookingsController < ApplicationController
   end
 
   def check_seat(seat_id, trip_id, from_station_id, to_station_id)
-    TripService.get_available_seats_by_trip(trip_id, from_station_id, to_station_id).include?(seat_id)
+    TripService.get_available_seats_by_trip(trip_id.to_i, from_station_id.to_i, to_station_id.to_i).include?(seat_id.to_i)
   end
 
   def booking_params

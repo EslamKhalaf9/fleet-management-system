@@ -11,6 +11,8 @@ Things you may want to cover:
 
 [Fleet Management System API Documentation](/ApiDocs.md)
 
+[postman collection](https://drive.google.com/file/d/1DBzKt3MrpMPnWLzQUAQE6jJyWk8zO_3K/view?usp=sharing)
+
 ### Database Schema
 ![Database Schema](FMS_Schema.png "Title")
 

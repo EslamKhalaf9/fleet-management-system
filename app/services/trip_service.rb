@@ -39,7 +39,6 @@ class TripService
       .where(trip_id: trip_id)
       .pluck(:id)
     
-    # debugger
     available_seats = all_seats - booked_seats.pluck(:seat_id).uniq + available_booked_seats
     available_seats.sort
   end
