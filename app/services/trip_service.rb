@@ -4,7 +4,7 @@ class TripService
     available_seats = trip_ids.map do |trip_id|
       {
         trip_id: trip_id,
-        seats: get_available_seats_by_trip(trip_id)
+        seats: get_available_seats_by_trip(trip_id, from_station_id, to_station_id)
       }
     end
   end
@@ -19,17 +19,29 @@ class TripService
       .uniq
   end
 
-  def self.get_available_seats_by_trip(trip_id)
+  def self.get_available_seats_by_trip(trip_id, from_station_id, to_station_id)
+
 
     booked_seats = Booking
       .where(trip_id: trip_id)
-      .pluck(:id)
-      .uniq
+
+    available_booked_seats = []
+
+    booked_seats.each do |booking|
+      booking_to_order = TripStation.where(trip_id: booking.trip_id, station_id: booking.to_station_id).pluck(:order).first
+      request_from_order = TripStation.where(trip_id: booking.trip_id, station_id: from_station_id).pluck(:order).first
+      if request_from_order > booking_to_order
+        available_booked_seats << booking.seat_id
+      end
+    end
 
     all_seats = Seat
       .where(trip_id: trip_id)
       .pluck(:id)
-    available_seats = all_seats - booked_seats
+    
+    # debugger
+    available_seats = all_seats - booked_seats.pluck(:seat_id).uniq + available_booked_seats
+    available_seats.sort
   end
 
 end
