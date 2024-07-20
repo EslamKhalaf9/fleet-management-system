@@ -74,3 +74,10 @@ production:
 ### Unit Tests using Rspec
 
 1. Run `rspec`
+
+### Test User data
+```bash
+username = "admin"
+email = "admin@mail.com"
+password = "123456789"
+```
