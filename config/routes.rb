@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   post "/auth", to: "auth#login"
 
   get "/seats/:from_station/:to_station", to: "seats#show"
+
+  resources :bookings, only: [:create, :index]
+  get "/bookings/all", to: "bookings#all"
 end
