@@ -6,8 +6,8 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+  ruby-3.3.4
 
-* System dependencies
 
 [Fleet Management System API Documentation](/ApiDocs.md)
 
@@ -38,7 +38,7 @@ Things you may want to cover:
 7. Run `rails s` to start the server
 8. Open http://localhost:3000 in your browser
 
-> if you have an issue with postgres please go to this commit [sqlite-setup](https://github.com/EslamKhalaf9/fleet-management-system/commit/4bf4f42d91bcfe69f752b687c91a8fd57fef2fd8) where I use sqlite
+> if you have an issue with postgres please switch to this branch as it uses sqlite [sqlite-version](https://github.com/EslamKhalaf9/fleet-management-system/tree/sqlite-version)
 
 ### Docker
 
