@@ -11,6 +11,15 @@ Things you may want to cover:
 
 [Fleet Management System API Documentation](/ApiDocs.md)
 
+### Database Schema
+![Database Schema](FMS_Schema.png "Title")
+
+### How Scalability is achieved
+- System admins can add as many trips as they want
+- System admins can add as many stations as they want
+- they can change the station order in a single trip without affecting other trips
+- each trip has his own available seats
+
 ## How to Start
 
 ### Local development
