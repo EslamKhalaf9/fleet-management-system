@@ -2,7 +2,7 @@ default: &default
   # adapter: sqlite3
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV.fetch("POSTGRES_HOST") %>
+  host: localhost
   timeout: 5000
 
 development:
@@ -25,6 +25,6 @@ test:
 production:
   <<: *default
   # database: storage/production.sqlite3
-  database: <%= ENV.fetch("POSTGRES_DB") %>
-  username: <%= ENV.fetch("POSTGRES_USER") %>
-  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
+  database: fleet_management_system_development
+  username: postgres
+  password: 123456
