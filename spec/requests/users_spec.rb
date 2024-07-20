@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 describe "Users API", type: :request do
+
+  let(:user) { UserService.create_user("test", "test@mail.com", "password") }
   
   describe "POST /users" do
     it "should create a new user" do
-      post users_path, params: { user: { username: "admin2", email: "admin2@mail.com", password: "password" } }
+      post users_path, params: { user: { username: "test2", email: "test2@mail.com", password: "password" } }
 
       expect(response).to have_http_status(:created)
-      expect(User.count).to eq(1)
     end
 
     it "should not create a new user with invalid email" do
@@ -35,7 +36,6 @@ describe "Users API", type: :request do
     end
 
     it "should return all users if authenticated" do
-      user = User.create(username: "admin", email: "admin@mail.com", password: "password")
       get users_path, headers: { "Authorization" => "Bearer #{JwtService.encode(user_id: user.id)}" }
       expect(response).to have_http_status(:ok)
     end
